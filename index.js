@@ -4,11 +4,12 @@ let BrowserPage = require("./lib/browser.js");
 let { filterParams, checkParamValue } = require("./lib/utils/validator.js");
 let config = require("./config.js");
 let PdfGenerator = require("./lib/pdfGenerator.js");
+const JobInfoParser = require("./lib/job-info-parser.js");
 
 
 //-----------------------------------------------------------------------------
 
-function getJobsList(params) {
+const getJobsList = async (params) => {
 	let page = new BrowserPage();
 	params = checkParamValue(filterParams(params));
 	let limit = config["max-pages"];
@@ -36,6 +37,21 @@ function getJobsList(params) {
 	});
 }
 
+
+function getJobInfo(url) {
+	let page    = new BrowserPage();
+	let params  = [];
+
+	let job     = page.getContent(url, params).then((content) => {
+		let parser = new JobInfoParser(content);
+		return parser.getContent();
+	});
+
+	return job.then((job) => {
+		return page.closePage().then(() => job);
+	});
+}
+
 //-----------------------------------------------------------------------------
 
 function getJobsPDF(params) {
@@ -58,5 +74,6 @@ function release() {
 
 exports.getJobsList = getJobsList;
 exports.getJobsPDF = getJobsPDF;
+exports.getJobInfo = getJobInfo;
 exports.release = release;
 exports.config = config;

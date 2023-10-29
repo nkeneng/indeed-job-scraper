@@ -2,7 +2,6 @@
 	"name": "indeed-job-scraper",
 	"author": "Kirollos Nasr (kirollos.nasr.shenouda@gmail.com)",
 	"description": "A node.js application to fetch jobs from indeed website",
-	"type": "module",
 	"version": "4.0.2",
 	"dependencies": {
 		"axios": "^1.4.0",
