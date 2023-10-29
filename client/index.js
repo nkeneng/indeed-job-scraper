@@ -1,14 +1,15 @@
-let { getJobsList, release, config } = require("../index.js");
+let { getJobsList, getJobsPDF, release, config } = require("../index.js");
+
+const express = require('express');
+
+const app = express();
 
 config["max-pages"] = "20"
 config["base-URL"] = "https://de.indeed.com/";
 config["verbose"] = true;
 
-// This is your Appwrite function
-// It's executed each time we get a request
-module.export = async ({ req, res, log, error }) => {
 
-	var data;
+app.get('/', (req, res) => {
 	//get job list data
 	getJobsList({
 		query: "php developer",
@@ -17,8 +18,11 @@ module.export = async ({ req, res, log, error }) => {
 		duplicate: 'unique',
 		sc: "0bf:exrec();",
 	})
-		.then(jobs => data = jobs)
+		.then(jobs => res.send(jobs))
 		.then(release);
 
-	return res.json(data)
-};
+});
+
+app.listen(3000, () => {
+	console.log('Server started on port 3000');
+});
