@@ -6,7 +6,7 @@ config["verbose"] = true;
 
 // This is your Appwrite function
 // It's executed each time we get a request
-export default async ({ req, res, log, error }) => {
+module.export = async ({ req, res, log, error }) => {
 
 	var data;
 	//get job list data
