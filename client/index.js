@@ -1,35 +1,17 @@
-let { getJobsList , getJobsPDF, release, config } = require("../index.js");
-let fs   = require("fs");
-let path = require("path");
+let { getJobsList, getJobsPDF, release, config } = require("../index.js");
 
 config["max-pages"] = "20"
-config["base-URL"]  = "https://uk.indeed.com/";
-config["verbose"]   = true;
-
+config["base-URL"] = "https://de.indeed.com/";
+config["verbose"] = true;
 
 
 //get job list data
 getJobsList({
-	query : "php",
-	fromdays : 1,
-	sitetype: "employer",
-	sort     : "date",
-	maxperpage : 20,
-	level      : "senior_level"
+	query: "php developer",
+	location: "berlin",
+	fromDays: 30,
+	duplicate: 'unique',
+	sc: "0bf:exrec();",
 })
-.then(console.log)
-.then(release);
-
-
-
-
-//get job list as a PDF report
-// getJobsPDF({
-// 	query      : "Android Developer",
-// 	fromdays   : 2,
-// 	sort       : "date",
-// 	maxperpage : 20,
-// 	level      : "senior_level",
-// }).then((pdfBuffer) => {
-// 	fs.writeFileSync(path.join(__dirname , "./jobs.pdf") , pdfBuffer);
-// }).then(release);
+	.then(console.log)
+	.then(release);
