@@ -25,7 +25,6 @@ const getJobsList = async (params) => {
 			jobs = jobs.concat(pageJobs);
 
 			if (nextLink === null) {
-				console.log("jobs length are ", jobs.length);
 				return jobs;
 			}
 			else return _getJobsList(parse(nextLink, true)["query"], jobs);
@@ -37,8 +36,7 @@ const getJobsList = async (params) => {
 	});
 }
 
-
-function getJobInfo(url) {
+const getJobInfo = async (url) => {
 	let page    = new BrowserPage();
 	let params  = [];
 

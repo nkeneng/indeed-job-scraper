@@ -15,15 +15,15 @@ const defaults = {
 		"job-salary": ["div.salary-snippet-container", "div.estimated-salary-container"]
 	},
 	"job-scrape" : {
-		"job-title"             : "h1.jobsearch-JobInfoHeader-title",
-		"company-name"          : "div.jobsearch-InlineCompanyRating-companyHeader",
-		"company-location"      : "div.jobsearch-JobInfoHeader-subtitle > div:nth-child(2)",
-		"company-rating"        : "meta[itemprop='ratingValue']",
-		"company-apply-link"    : "a.jobsearch-CallToApply-applyButton-newDesign",
-		"job-salary"            : ["div.jobsearch-JobDescriptionSection-sectionItemKey:contains('Salary') ~ span", "div[id='salaryGuide'] > ul > li:nth-child(2)"],
-		"job-type"              : "div.jobsearch-JobDescriptionSection-sectionItemKey:contains('Job Type') ~ div",
+		
+		"job-title"             : "h1.jobsearch-JobInfoHeader-title > span",
+		"company-name"          : 'div[data-testid="inlineHeader-companyName"] > span > a',
+		"company-location"      : 'div[data-testid="inlineHeader-companyLocation"] > div',
+		"company-apply-link"    : "#indeedApplyButton",
+		"job-type"              : "#salaryInfoAndJobType > span",
+		"job-description"       : "div#jobDescriptionText",
+
 		"job-qualifications"    : "ul.jobsearch-ReqAndQualSection-item--closedBullets > li.jobsearch-ReqAndQualSection-item",
-		"job-description"       : "div.jobsearch-jobDescriptionText",
 		"job-activity"          : "h3.jobsearch-HiringInsights-subheader:contains('Job activity') + p > span:nth-child(2)",
 	},
 	"base-URL": "https://de.indeed.com",
