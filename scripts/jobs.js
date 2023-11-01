@@ -18,7 +18,14 @@ config["max-pages"] = maxPage;
             fromDays: 30,
             duplicate: 'unique',
         });
-        release().then(() => process.stdout.write(JSON.stringify(jobs)))
+        if (jobs) {
+            await release()
+            process.stdout.write(JSON.stringify(jobs))
+            process.exit()
+        } else {
+            console.log("No jobs found");
+            process.exit(1)
+        }
     } catch (error) {
         console.log(error);
     }

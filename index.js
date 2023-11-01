@@ -11,6 +11,7 @@ const JobInfoParser = require("./lib/job-info-parser.js");
 
 const getJobsList = async (params) => {
 	let page = new BrowserPage();
+
 	params = checkParamValue(filterParams(params));
 	let limit = config["max-pages"];
 
@@ -18,8 +19,9 @@ const getJobsList = async (params) => {
 		if (limit-- === 0) return Promise.resolve(jobs);
 		let url = new URL("jobs", config["base-URL"]);
 
-		return page.getContent(url, params).then((content) => {
+		return  page.getContent(url, params).then((content) => {
 			if (config["verbose"]) console.log("\u2714", url.href);
+
 			let parser = new PageParser(content);
 			let { pageJobs, nextLink } = parser.getContent();
 			jobs = jobs.concat(pageJobs);

@@ -1,11 +1,15 @@
 const { exec } = require('child_process');
 const express = require('express');
 const basicAuth = require('express-basic-auth');
+require('dotenv').config();
+
 
 const app = express();
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
 
 app.use(basicAuth({
-    users: { 'admin': 'scraper-copilot' }
+    users: { [username]: password },
 }));
 
 app.use(express.json()); // pour les données JSON
